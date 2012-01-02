@@ -2,7 +2,11 @@
 [?php include_partial('<?php echo $this->getModuleName() ?>/assets') ?]
 
 <div id="sf_admin_container">
+  <?php if (sfConfig::get('app_bootstrap_page_title_slot') === null): ?>
   <h1>[?php echo <?php echo $this->getI18NString('list.title') ?> ?]</h1>
+  <?php else: ?>
+  [?php slot('<?php echo sfConfig::get('app_bootstrap_page_title_slot'); ?>', <?php echo $this->getI18NString('list.title') ?>); ?]
+  <?php endif; ?>
 
   [?php include_partial('<?php echo $this->getModuleName() ?>/flashes') ?]
 
