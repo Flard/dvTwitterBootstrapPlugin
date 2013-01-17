@@ -8,7 +8,9 @@ class dvWidgetFormSchemaFormatterBootstrap extends sfWidgetFormSchemaFormatter {
         $helpFormat      = '<span class="help-block">%help%</span>',
         $errorListFormatInARow = '<span class="help-inline">%errors%</span>',
         $errorRowFormatInARow = '%error%',
+        $requiredTemplate= '<pow class="requiredFormItem">*</pow>',
         $decoratorFormat = "%content%";
+    protected $validatorSchema = null;
 
     public function formatRow($label, $field, $errors = array(), $help = '', $hiddenFields = null)
     {
@@ -34,5 +36,29 @@ class dvWidgetFormSchemaFormatterBootstrap extends sfWidgetFormSchemaFormatter {
             '%help%'          => $this->formatHelp($help),
             '%hidden_fields%' => null === $hiddenFields ? '%hidden_fields%' : $hiddenFields,
         ));
+    }
+
+    public function generateLabelName($name)
+    {
+        $label = parent::generateLabelName($name);
+
+        if (isset($this->validatorSchema)) {
+
+            $fields = $this->validatorSchema->getFields();
+            if($fields[$name] != null) {
+                $field = $fields[$name];
+                if($field->hasOption('required') && $field->getOption('required')) {
+                    $label .= $this->requiredTemplate;
+                }
+            }
+            $label .= ':';
+
+        }
+        return $label;
+    }
+
+    public function setValidatorSchema(sfValidatorSchema $validatorSchema)
+    {
+        $this->validatorSchema = $validatorSchema;
     }
 }

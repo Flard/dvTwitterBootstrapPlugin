@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
  
-class sfWidgetFormSchemaFormatterBootstrapHorizontal extends sfWidgetFormSchemaFormatter {
+class sfWidgetFormSchemaFormatterBootstrapHorizontal extends dvWidgetFormSchemaFormatterBootstrap {
 
     protected
         $rowFormat       = "<div class=\"control-group %extra_classes%\">\n  %label%\n  <div class=\"controls\">%field%%error%%help%</div>\n%hidden_fields%</div>\n",
