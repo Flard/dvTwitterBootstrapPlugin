@@ -15,7 +15,7 @@ class sfWidgetFormSchemaFormatterBootstrapHorizontal extends dvWidgetFormSchemaF
         $errorRowFormat  = "<li>\n%errors%</li>\n",
         $helpFormat      = '<span class="help-block">%help%</span>',
         $errorListFormatInARow = '<span class="help-inline">%errors%</span>',
-        $errorRowFormatInARow = '%error%',
+        $errorRowFormatInARow = '%error% ',
         $decoratorFormat = "%content%";
 
     public function formatRow($label, $field, $errors = array(), $help = '', $hiddenFields = null)
@@ -32,6 +32,8 @@ class sfWidgetFormSchemaFormatterBootstrapHorizontal extends dvWidgetFormSchemaF
         $rowFormat = $isInlineRow ? $this->inlineRowFormat : $this->rowFormat;
 
         if ($isInlineRow) {
+            $label = str_replace(':</label>', '</label>', $label);
+
             $field = '<label class="checkbox">'.$field . strip_tags($label).'</label>';
         }
 
