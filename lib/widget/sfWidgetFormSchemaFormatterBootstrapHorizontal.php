@@ -27,6 +27,7 @@ class sfWidgetFormSchemaFormatterBootstrapHorizontal extends dvWidgetFormSchemaF
         }
 
         $isInlineRow = (strpos($field, 'type="checkbox"') !== false);
+        $isAttachmentFormRow = (strpos($field, 'class="item-attachments"') !== false);
         $label = str_replace('<label for=', '<label class="control-label" for=', $label);
 
         $rowFormat = $isInlineRow ? $this->inlineRowFormat : $this->rowFormat;
@@ -35,6 +36,9 @@ class sfWidgetFormSchemaFormatterBootstrapHorizontal extends dvWidgetFormSchemaF
             $label = str_replace(':</label>', '</label>', $label);
 
             $field = '<label class="checkbox">'.$field . strip_tags($label).'</label>';
+        }
+        if ($isAttachmentFormRow) {
+            return '<div class="item-attachments-form">'.$field.'</div>';
         }
 
         return strtr($rowFormat, array(
